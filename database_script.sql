@@ -60,6 +60,7 @@ CREATE TABLE contrats (
                           date_reponse DATE,
                           etat_contrat VARCHAR(30),
                           prix NUMERIC(10, 3),
+                          prix_final NUMERIC(10, 3),
                           id_agent_drh INTEGER references agentsdrh(id) on delete set null
 );
 
@@ -74,8 +75,11 @@ CREATE TABLE prestations (
                              id SERIAL PRIMARY KEY,
                              date_debut DATE,
                              date_fin DATE,
+                             date_fin_finale date,
+                             date_deb_finale date,
                              duree INTEGER,
                              prix NUMERIC(10, 3),
+                             prix_final NUMERIC(10, 3),
                              id_competence INTEGER REFERENCES competences(id),
                              id_contrat INTEGER REFERENCES contrats(id) on delete cascade,
                              description varchar(30)
