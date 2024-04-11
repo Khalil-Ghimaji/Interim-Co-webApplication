@@ -44,7 +44,7 @@
         
 ?>
 <div class="container mt-5">
-        <?=alertMessage();?>
+
         <h2 class="text-center">Gestion des Employés</h2>
         
         <form class="mb-3" action="" method="post">
@@ -99,10 +99,11 @@
                 $employee_competences=array();
                 $unique=array();
                 foreach($table as $employee){
-                    if(!in_array($employee['id'],$employee_competences)){
+                    if(!array_key_exists($employee['id'],$employee_competences)){
                         $employee_competences[$employee['id']]=[];
                         $unique[]=$employee;
                     }
+
                     $employee_competences[$employee['id']][]=$employee['competence'].'('.$employee['niveau_competence'].')';
                 }
                 foreach ($unique as $employee){

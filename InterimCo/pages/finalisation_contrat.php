@@ -5,6 +5,8 @@ if (!isset($_SESSION['authenticated_user']) or !isset($_POST['contrat_id']) or !
     exit;
 }
 set_status($_POST['contrat_id'],'Finalisé');
+$_SESSION['msg']="Contrat finalisé";
+$_SESSION['msg_type']="success";
 header('Location: /liste-contrats');
 exit;
 ?>

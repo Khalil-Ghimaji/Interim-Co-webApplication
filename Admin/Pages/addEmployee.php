@@ -1,17 +1,18 @@
 <?php
     require_once 'functions.php';
-    require_once 'ConnexionBD.php';
+    require_once '../../ConnexionBD.php';
     if(session_status() == PHP_SESSION_NONE){
         session_start();
     }
-    if(!isset($_SESSION['authenticated_admin'])||$_SESSION['authenticated_role']!="admin"){
+//    if(!isset($_SESSION['authenticated_admin'])||$_SESSION['authenticated_role']!="admin"){
+    if(!isset($_SESSION['authenticated_admin'])){
+
         header('Location:/login');
         exit;
     }
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
     $nom = $_POST["nom"];
     $prenom = $_POST["prenom"];
     $email = $_POST["email"];

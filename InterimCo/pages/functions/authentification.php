@@ -7,7 +7,7 @@ function login(string $tableName,string $redirection)
         $user=get_user_by_username($username);
         if ($user and password_verify($password,$user['mot_de_passe'])) {
             $_SESSION['authenticated_user'] = $user['id'];
-            $_SESSION['authenticated_role'] = $tableName;
+//            $_SESSION['authenticated_role'] = $tableName;
             header('Location: /' . $redirection);
             exit;
         }

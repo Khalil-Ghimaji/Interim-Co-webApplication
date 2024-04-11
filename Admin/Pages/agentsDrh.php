@@ -37,7 +37,7 @@
 ?>
 
 <div class="container mt-5">
-        <?=alertMessage();?>
+
         <h2 class="text-center">Gestion des Agents DRH</h2>
         
         <form class="mb-3" action="" method="post">

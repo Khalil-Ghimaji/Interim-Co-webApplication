@@ -13,6 +13,8 @@ if ($_SERVER['REQUEST_METHOD']==='POST'){
         }
     }
     estimate_price($id_contrat);
+    $_SESSION['msg']="Contrat ajouté avec succès";
+    $_SESSION['msg_type']="success";
     header('Location:/liste-contrats');
     exit;
 }?>

@@ -32,9 +32,9 @@
     $table = $pdo->query($query);
 
 ?>
-<body>
+
 <div class="container mt-5">
-        <?=alertMessage();?>
+
         <h2 class="text-center">Gestion des Clients </h2>
         <form class="mb-3" action="" method="post">
             <div class="form-group">

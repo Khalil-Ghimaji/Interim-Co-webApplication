@@ -18,7 +18,7 @@ $filter_etat_contrat = isset($_POST['filter_etat_contrat']) ? $_POST['filter_eta
 
 $filter_client=strtolower($filter_client);
 
-$whereClause = "";
+$whereClause = "etat_contrat!='En attente de validation' AND ";
 
 if (!empty($filter_client)) {
     $whereClause .= " LOWER(clients.nom) LIKE '%$filter_client%' AND ";
@@ -38,9 +38,10 @@ if (!empty($whereClause)) {
     $whereClause = 'WHERE '.rtrim($whereClause, ' AND ');
 }
 
-$query = "SELECT contrats.*, clients.nom 
-            FROM contrats 
-            LEFT JOIN clients ON contrats.id_client = clients.id 
+$query = "SELECT co.*, cl.nom as nom_cli , a.nom , a.prenom
+            FROM contrats co
+            LEFT JOIN clients cl ON co.id_client = cl.id
+            LEFT JOIN agentsdrh a ON co.id_agent_drh = a.id 
             $whereClause";
 $table = $conn->query($query);
 ?>
@@ -83,11 +84,13 @@ $table = $conn->query($query);
                     <th>ID</th>
                     <th>Client ID</th>
                     <th>Nom du Client</th>
+                    <th>Agent DRH</th>
                     <th>Libellé</th>
                     <th>Date Soumission</th>
                     <th>Date Réponse</th>
                     <th>Etat Contrat</th>
                     <th>Prix</th>
+
                     <th>Action</th>
                 </tr>
             </thead>
@@ -97,14 +100,15 @@ $table = $conn->query($query);
                     echo "<tr>
                             <td>".$row["id"]."</td>
                             <td>".$row["id_client"]."</td>
-                            <td>".$row["nom"]."</td>
+                            <td>".$row["nom_cli"]."</td>
+                            <td>".$row["nom"] . ' ' . $row["prenom"]."</td>
                             <td>".$row["libelle"]."</td>
                             <td>".$row["date_soumission"]."</td>
                             <td>".$row["date_reponse"]."</td>
                             <td>".$row["etat_contrat"]."</td>
                             <td>".$row["prix"]."</td>
                             
-                                <td><a href='/prestations?id=".$row["id"]."&libelle=".$row["libelle"]."'><button>View Prestations</button></a></td>
+                                <td><a href='/prestations?id=".$row["id"]."&libelle=".$row["libelle"]."'><button>Voir Prestations</button></a></td>
                             
                         </tr>";
                 }

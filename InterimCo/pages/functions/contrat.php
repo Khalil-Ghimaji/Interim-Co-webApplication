@@ -20,9 +20,9 @@ function insert_prestation($id_contrat,$date_debut,$date_fin,$description,$duree
     $response=$request1->fetch(PDO::FETCH_ASSOC);
     $id_competence = $response['id'];
 
-    $query='insert into prestations (id_contrat,date_debut,date_fin,description,duree,id_competence) values (?,?,?,?,?,?)';
+    $query='insert into prestations (id_contrat,date_debut,date_fin,description,duree,id_competence,date_deb_finale,date_fin_finale) values (?,?,?,?,?,?,?,?)';
     $request=$bdd->prepare($query);
-    $request->execute(array($id_contrat,$date_debut,$date_fin,$description,$duree,$id_competence));
+    $request->execute(array($id_contrat,$date_debut,$date_fin,$description,$duree,$id_competence,$date_debut,$date_fin));
     $prestationId=$bdd->lastInsertId();
     $bdd=null;
     ConnexionBD::close();
@@ -88,10 +88,10 @@ function update_prestation($id_prestation,$id_contrat,$date_debut,$date_fin,$des
     $id_competence = $response['id'];
 
     $query='UPDATE prestations
-            SET id_contrat = ?, date_debut = ?, date_fin = ?, description = ?, duree = ?, id_competence = ?
+            SET id_contrat = ?, date_debut = ?, date_fin = ?, description = ?, duree = ?, id_competence = ?,date_deb_finale=?,date_fin_finale=?
             WHERE id = ?;';
     $request=$bdd->prepare($query);
-    $request->execute(array($id_contrat,$date_debut,$date_fin,$description,$duree,$id_competence,$id_prestation));
+    $request->execute(array($id_contrat,$date_debut,$date_fin,$description,$duree,$id_competence,$date_debut,$date_fin,$id_prestation));
     $bdd=null;
     ConnexionBD::close();
 }
@@ -109,9 +109,19 @@ function estimate_price($id_contrat){
     $query="update contrats set prix =(select sum(c.prix_estime*p.duree)from prestations p left join competences c on p.id_competence =c.id where p.id_contrat =?) where id=?";
     $request=$bdd->prepare($query);
     $request->execute(array($id_contrat,$id_contrat));
-    $query="update prestations p set prix =(select c.prix_estime*p.duree from prestations p left join competences c on p.id_competence =c.id where p.id_contrat =?) where p.id_contrat =?";
+
+    $query="update contrats set prix_final = prix where id=?;";
     $request=$bdd->prepare($query);
-    $request->execute(array($id_contrat,$id_contrat));
+    $request->execute(array($id_contrat));
+
+    $query="update prestations pr set prix =(select c.prix_estime*p.duree from prestations p left join competences c on p.id_competence =c.id where p.id =pr.id) where pr.id_contrat =?";
+    $request=$bdd->prepare($query);
+    $request->execute(array($id_contrat));
+
+//    $query="update prestations set prix_final = prix where id_contrat=?;";
+//    $request=$bdd->prepare($query);
+//    $request->execute(array($id_contrat));
+
     $bdd=null;
     ConnexionBD::close();
 }

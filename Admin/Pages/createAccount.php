@@ -3,7 +3,7 @@
 ?>
 <div class="container mt-5">
     
-    <?=alertMessage();?>
+
     <form method="POST" action="" >
         <div class="form-group">
             <label for="name">Nom :</label>

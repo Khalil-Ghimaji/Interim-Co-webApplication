@@ -38,7 +38,7 @@ $table = $conn->query($query);
 ?>
 
 <div class="container mt-5">
-    <?=alertMessage();?>
+
     <h2 class="text-center">Gestions des Competences</h2>
     
     <form action="" method="post">

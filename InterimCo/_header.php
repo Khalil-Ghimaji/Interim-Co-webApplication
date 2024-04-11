@@ -70,11 +70,13 @@ $notifications = load_notifications($_SESSION['authenticated_user']);
                         else{
                             foreach($notifications as $notification){?>
                                 <li>
-                                    <a class="dropdown-item" href="<?="/contrat?id=".$notification['id_contrat'];?>">
-                                        <p>
-                                            <?=$notification['message'];?><br>
-                                            <small><?=$notification['date_envoi'];?></small>
-                                        </p>
+                                    <a style="min-width: 285px" class="dropdown-item" href="<?= "/contrat?id=" . $notification['id_contrat']; ?>">
+                                        <div  style="white-space: normal;">
+                                            <p>
+                                                <?= $notification['message']; ?><br>
+                                                <small><?= date("Y-m-d H:i:s", strtotime($notification['date_envoi'])); ?></small>
+                                            </p>
+                                        </div>
                                     </a>
                                 </li>
                             <?php }
@@ -97,3 +99,12 @@ $notifications = load_notifications($_SESSION['authenticated_user']);
     </div>
 </nav>
 <div class="container mt-5">
+    <?php
+    if(isset($_SESSION['msg'])){
+        $type=$_SESSION['msg_type'];
+        echo "<div class=\"alert alert-$type mt-3\" role=\"alert\">
+        ".$_SESSION['msg']."</div>";
+        unset($_SESSION['msg']);
+        unset($_SESSION['msg_type']);
+    }
+    ?>

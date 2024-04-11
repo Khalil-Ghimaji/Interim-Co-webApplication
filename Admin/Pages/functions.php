@@ -56,7 +56,7 @@
             $admin=getAdmin($pdo);
             if ($admin['login']===$login and password_verify($password,$admin['mot_de_passe'])){
                 $_SESSION['authenticated_admin']=$admin["login"];
-                $_SESSION['authenticated_role']=$tableName;
+//                $_SESSION['authenticated_role']=$tableName;
                 header('Location: '.$redirection);
                 exit;
             }

@@ -1,7 +1,7 @@
 <?php
 include(__DIR__.'/../_bootstrap.php');
 require '../pages/functions/BD.php';
-require '../pages/class/ConnexionBD.php';
+require '../../ConnexionBD.php';
 require '../pages/functions/authentification.php';
 require '../pages/functions/contrat.php';
 

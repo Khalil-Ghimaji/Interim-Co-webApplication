@@ -4,7 +4,7 @@
 <input type="hidden" id="is_deleted${i}" name="is_deleted${i}" value=false >
 <div>
     <label class="form-label" for="description${i}">Description:</label>
-    <input class="form-control" type="text" id="description${i}" name="description${i}" ${prestation_content['description']?"value="+prestation_content['description']:''} ${disable_fields ? 'disabled':''} required>
+    <input class="form-control" type="text" id="description${i}" name="description${i}" ${prestation_content['description']?"value='"+prestation_content['description']+"'":''} ${disable_fields ? 'disabled':''} required>
 </div>
 <div>
     <label class="form-label" for="competence${i}">Competence:</label>

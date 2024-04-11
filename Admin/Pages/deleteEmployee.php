@@ -1,9 +1,10 @@
 <?php
     session_start();
     require_once 'functions.php';
-    require_once 'ConnexionBD.php';
+    require_once '../../ConnexionBD.php';
 
-    if(!isset($_SESSION['authenticated_admin'])||$_SESSION['authenticated_role']!="admin"){
+//    if(!isset($_SESSION['authenticated_admin'])||$_SESSION['authenticated_role']!="admin"){
+    if(!isset($_SESSION['authenticated_admin'])){
         header('Location:/login');
         exit;
     }
@@ -14,17 +15,17 @@
         $id=$_GET['id'];
     }
     else{
-        redirect("/employees","No id found.","danger");
+        redirect("/employees","id inexistant.","danger");
         return false;
     }
     if(empty($id)){
-        redirect("/employees","No id given.","danger");
+        redirect("/employees","id non spécifié.","danger");
         return false;
     }
     $pdo = ConnexionBD::openConnexion();
     $employee=getById($pdo,$table,$id);
     if(!$employee){
-        redirect("/employees","Employee not found","danger");
+        redirect("/employees","Employé inexistant","danger");
         return false;
     }
 

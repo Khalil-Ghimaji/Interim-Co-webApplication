@@ -37,3 +37,12 @@
     </div>
 </nav>
 <div class="container mt-5">
+    <?php
+    if(isset($_SESSION['msg'])){
+        $type=$_SESSION['msg_type'];
+        echo "<div class=\"alert alert-$type mt-3\" role=\"alert\">
+        ".$_SESSION['msg']."</div>";
+        unset($_SESSION['msg']);
+        unset($_SESSION['msg_type']);
+    }
+    ?>

@@ -8,6 +8,8 @@ $form_errors=[];
 if ($_SERVER['REQUEST_METHOD']==='POST'){
     $_POST['mot_de_passe']=password_hash($_POST['mot_de_passe'],PASSWORD_DEFAULT);
     if(create_new_client($_POST)){
+        $_SESSION['msg']="Compte client crée avec succès";
+        $_SESSION['msg_type']="success";
         header('Location:/login');
         exit;
     }

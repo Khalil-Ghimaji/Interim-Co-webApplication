@@ -1,10 +1,11 @@
 <?php
-    require_once 'ConnexionBD.php'; 
+    require_once '../../ConnexionBD.php';
     require_once 'functions.php'; 
     if(session_status() == PHP_SESSION_NONE){
         session_start();
     }
-    if(!isset($_SESSION['authenticated_admin'])||$_SESSION['authenticated_role']!="admin"){
+//    if(!isset($_SESSION['authenticated_admin'])||$_SESSION['authenticated_role']!="admin"){
+    if(!isset($_SESSION['authenticated_admin'])){
         header('Location:/login');
         exit;
     }
@@ -30,3 +31,4 @@
 </head>
 <body>
 <?php require_once 'navbar.php' ?>
+<?=alertMessage();?>

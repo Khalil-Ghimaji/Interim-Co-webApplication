@@ -1,11 +1,11 @@
 <?php
     require 'functions.php';
-    require 'ConnexionBD.php';
-
+    require_once '../../ConnexionBD.php';
     if(session_status() == PHP_SESSION_NONE){
         session_start();
     }
-    if(isset($_SESSION['authenticated_admin'])&&$_SESSION['authenticated_role']=="admin"){
+//    if(isset($_SESSION['authenticated_admin'])&&$_SESSION['authenticated_role']=="admin"){
+    if(isset($_SESSION['authenticated_admin'])){
         header('Location:/');
         exit;
     }

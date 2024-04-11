@@ -25,6 +25,8 @@ if ($_SERVER['REQUEST_METHOD']==='POST'){
         else{
             if(update_user($user_id,$_POST)) {
                 $enable_modif = false;
+                $_SESSION['msg']="Profil mis à jour avec succès";
+                $_SESSION['msg_type']="success";
                 update_password($user_id, $new_pwd);
             }
             else{
@@ -37,6 +39,8 @@ if ($_SERVER['REQUEST_METHOD']==='POST'){
     }
     else{
         if(update_user($user_id,$_POST)) {
+            $_SESSION['msg']="Profil mis à jour avec succès";
+            $_SESSION['msg_type']="success";
             $enable_modif = false;
         }else{
             $form_errors['nom_utilisateur']="Le nom d'utilisateur existe déjà";

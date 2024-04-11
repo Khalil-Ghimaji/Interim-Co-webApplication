@@ -5,6 +5,8 @@ if (!isset($_SESSION['authenticated_user']) or !isset($_POST['contrat_id']) or !
     exit;
 }
 delete('contrats',$_POST['contrat_id']);
+$_SESSION['msg']="Contrat supprimé avec succès";
+$_SESSION['msg_type']="success";
 header('Location: /liste-contrats');
 exit;
 ?>

@@ -1,9 +1,10 @@
 <?php
     session_start();
     require_once 'functions.php';
-    require_once 'ConnexionBD.php';
+require_once '../../ConnexionBD.php';
 
-    if(!isset($_SESSION['authenticated_admin'])||$_SESSION['authenticated_role']!="admin"){
+//    if(!isset($_SESSION['authenticated_admin'])||$_SESSION['authenticated_role']!="admin"){
+    if(!isset($_SESSION['authenticated_admin'])){
         header('Location:/login');
         exit;
     }
